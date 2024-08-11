@@ -53,20 +53,20 @@ st.sidebar.title('2024 Election Results Dashboard')
 st.sidebar.markdown('Explore the 2024 election results by state, constituency, party, and more.')
 
 # Filters
-states = merged_df['State'].unique()
+states = sorted(merged_df['State'].unique())  # Sort states alphabetically
 selected_state = st.sidebar.selectbox('Select State', states)
 
 filtered_df = merged_df[merged_df['State'] == selected_state]
 
 # Additional Filters with Select All Option
-parties = filtered_df['Party'].unique()
+parties = sorted(filtered_df['Party'].unique())  # Sort parties alphabetically
 parties = ['Select All'] + list(parties)
 selected_party = st.sidebar.multiselect('Select Party', parties, default='Select All')
 
 if 'Select All' in selected_party:
     selected_party = filtered_df['Party'].unique()
 
-candidates = filtered_df['Candidate Name'].unique()
+candidates = sorted(filtered_df['Candidate Name'].unique())  # Sort candidates alphabetically
 candidates = ['Select All'] + list(candidates)
 selected_candidate = st.sidebar.multiselect('Select Candidate', candidates, default='Select All')
 
@@ -127,12 +127,13 @@ else:
 
 # Winning candidate profile
 st.header('Winning Candidate Profile')
-st.markdown("#### View the profile of winning candidates.")
+st.markdown(f"#### View the profile of winning candidates in {selected_state}.")
 if not filtered_df.empty:
-    winning_candidates = winners_df[['Winning Candidate', 'Winning Party', 'State', 'Margin Votes']].drop_duplicates()
-    st.write(winning_candidates)
+    winning_candidates_state = winners_df[winners_df['State'] == selected_state]  # Filter winners for the selected state
+    winning_candidates_state = winning_candidates_state[['Winning Candidate', 'Winning Party', 'State', 'Margin Votes']].drop_duplicates()
+    st.write(winning_candidates_state)
 else:
-    st.write("No data available for winning candidate profiles.")
+    st.write(f"No data available for winning candidate profiles in {selected_state}.")
 
 # State-wise summary
 st.header('State-wise Summary')
@@ -153,3 +154,8 @@ if not search_results.empty:
     st.write(search_results)
 else:
     st.write("No results found.")
+
+# Download option for filtered data
+st.sidebar.header('Download Data')
+csv = filtered_df.to_csv(index=False)
+st.sidebar.download_button(label='Download CSV', data=csv, file_name=f'{selected_state}_election_results.csv', mime='text/csv')
