@@ -7,6 +7,7 @@ This project is a web-based dashboard built using Streamlit to visualize and ana
 - **State and Constituency-Level Analysis**: Explore election results filtered by state and constituency. Visualize the total votes received by candidates, broken down by party.
   
 - **Party Performance**: Analyze the overall performance of political parties based on the total votes they received.
+![State and Constituency-Level Analysis](Picture1.png)
 
 - **Voter Turnout**: Understand voter turnout by constituency, providing insights into electoral engagement.
 
