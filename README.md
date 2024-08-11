@@ -41,7 +41,7 @@ This project is a web-based dashboard built using Streamlit to visualize and ana
 
 
 ##Deployment
-[Link Text](https://2024electionresultdashboard-2kub9zqk9nzhgvmjfupt77.streamlit.app/)
+[2024 ELECTION DASHBORAD](https://2024electionresultdashboard-2kub9zqk9nzhgvmjfupt77.streamlit.app/)
 
 
 
