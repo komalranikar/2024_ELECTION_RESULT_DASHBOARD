@@ -106,15 +106,6 @@ if not filtered_df.empty:
 else:
     st.write("No data available for party performance in the selected filters.")
 
-# Winning margin distribution
-st.header('Winning Margin Distribution')
-st.markdown("#### Explore the distribution of winning margins.")
-if 'Margin Votes' in filtered_df.columns and not filtered_df['Margin Votes'].isnull().all():
-    fig = px.histogram(filtered_df, x='Margin Votes', nbins=20, title='Distribution of Winning Margins')
-    st.plotly_chart(fig)
-else:
-    st.write("No data available for winning margin distribution in the selected filters.")
-
 # Voter turnout analysis
 st.header('Voter Turnout Analysis')
 st.markdown("#### Analyze voter turnout by constituency.")
